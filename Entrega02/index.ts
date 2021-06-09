@@ -1,32 +1,30 @@
 const operacion = async (num1: number, num2: number, op: string) => {
-
-  const { Suma } = await import('./Suma.js');
-  const { Resta } = await import('./Resta.js');
-  
-  return new Promise<number>((resolve, reject) => {
-    if(op === "suma"){
+  try {
+    if (op === "suma") {
+      const { Suma } = await import('./Suma');
       const e = new Suma(num1, num2);
-      resolve(e.resultado());
+      return Promise.resolve(e.resultado());
     } else if (op === "resta") {
+      const { Resta } = await import('./Resta.js');
       const e = new Resta(num1, num2);
-      resolve(e.resultado());
+      return Promise.resolve(e.resultado());
     } else {
-      reject("Not a valid operation");
+      return "Not a valid operation";
     }
-  })
+  } catch(e) {
+    console.log(e);
+  }
 }
 
-
-const operaciones = () => {
+const operaciones = async () => {
   // Llamada a operacion suma
-  operacion(2, 3, "suma").then(result => console.log(result)).catch(e => console.log(e));
+  console.log(await operacion(2, 3, "suma"));
 
   // Llamada a operacion resta
-  operacion(7, 3, "resta").then(result => console.log(result)).catch(e => console.log(e));
+  console.log(await operacion(7, 3, "resta"));
 
   // Llamada a operacion con error
-  operacion(7, 3, "sumacion").then(result => console.log(result)).catch(e => console.log(e));
+  console.log(await operacion(7, 3, "sumacion"));
 }
-
 
 operaciones();
