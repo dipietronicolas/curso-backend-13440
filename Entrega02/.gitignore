@@ -1,1 +1,5 @@
+#carpeta con modulos de node
 /node_modules
+
+#carpeta con archivos compilados
+/dist
