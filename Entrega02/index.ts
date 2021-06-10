@@ -5,7 +5,7 @@ const operacion = async (num1: number, num2: number, op: string) => {
       const e = new Suma(num1, num2);
       return Promise.resolve(e.resultado());
     } else if (op === "resta") {
-      const { Resta } = await import('./Resta.js');
+      const { Resta } = await import('./Resta');
       const e = new Resta(num1, num2);
       return Promise.resolve(e.resultado());
     } else {
