@@ -1,6 +1,7 @@
 // correr con npm run dev06
 
-const Archivo = require('./Archivo');
+//const Archivo = require('./Archivo');
+import { Archivo } from './Archivo.js';
 const archivo = new Archivo('Entrega.txt');
 
 const llamadas = async () => {
@@ -16,5 +17,5 @@ const llamadas = async () => {
 llamadas();
 
 // Funcion que borra el archivo, descomentar para borrar
-//archivo.borrar();
+// archivo.borrar();
 

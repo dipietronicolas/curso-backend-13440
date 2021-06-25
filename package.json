@@ -4,9 +4,9 @@
   "description": "This repository was created to upload my homework for the backend curse i'm attending to.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev05": "nodemon ./Entrega05/index.js",
-    "dev06": "node ./Entrega06/index.js"
+    "dev06": "node ./Entrega06/index.js",
+    "dev07": "nodemon ./Entrega07/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,9 @@
   "homepage": "https://github.com/dipietronicolas/curso-backend-13440#readme",
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+   "type": "module" 
 }
