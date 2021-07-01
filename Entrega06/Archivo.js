@@ -22,6 +22,7 @@ export class Archivo {
       data.push({
         title, price, thumbnail, id: data.length + 1
       })
+      
       await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify(data))
     } catch (error) {
       await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify([{
