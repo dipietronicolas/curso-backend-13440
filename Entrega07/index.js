@@ -17,7 +17,7 @@ app.get('/items', async (req, res) => {
   visitasItems++;
   try {
     const data = await fs.promises.readFile('./Entrega07/Productos.txt', 'utf-8');
-    const items = eval(data);
+    const items = JSON.parse(data);
     res.json({ 
       items, cantidad: items.length
     }) 
@@ -32,7 +32,7 @@ app.get('/item-random', async (req, res) => {
   visitasItemRandom++;
   try {
     const data = await fs.promises.readFile('./Entrega07/Productos.txt', 'utf-8');
-    const items = eval(data);
+    const items = JSON.parse(data);
     res.json({ 
       items: items[parseInt(Math.random() * items.length)]
     }) 

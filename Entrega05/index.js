@@ -3,12 +3,11 @@
 
 import http from 'http';
 const server = http.createServer((req, res) => {
-    const randomNumber = parseInt((Math.random() * 10) + 1 ) 
     const myObject = {
-        id: randomNumber,
-        title: `Producto: ${randomNumber}`,
-        price: (Math.random() * [1, 10, 100, 1000, 10000][parseInt(Math.random() * 5)]).toFixed(2),
-        thumbnail: `Foto ${randomNumber}`
+        id: parseInt((Math.random() * 10) + 1 ),
+        title: `Producto: ${parseInt((Math.random() * 10) + 1 )}`,
+        price: (Math.random() * 10000).toFixed(2),
+        thumbnail: `Foto ${parseInt((Math.random() * 10) + 1 )}`
     }
     res.end(`<h1>${JSON.stringify(myObject)}</h1>`);
 });
@@ -16,3 +15,5 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`Listen on port ${PORT}`);
 })
+
+

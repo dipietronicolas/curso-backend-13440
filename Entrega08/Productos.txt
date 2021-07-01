@@ -1,0 +1,1 @@
+[{"title":"Frasco","price":500,"thumbnail":"./assets/img01.jpg","id":1},{"title":"Mesa","price":8000,"thumbnail":"./assets/img02.jpg","id":2},{"title":"Botella","price":600,"thumbnail":"./assets/img03.jpg","id":3}]
