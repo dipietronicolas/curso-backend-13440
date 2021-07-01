@@ -8,10 +8,11 @@ export class Productos {
   // Funcion que lee el archivo
   leer = async () => {
     try {
-      const data = await fs.promises.readFile(`./Entrega08/${this.file_name}`, 'utf-8');
-      if(eval(data).length === 0)
+      const data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
+      const data_json = JSON.parse(data);
+      if(data_json.length === 0)
         return {error : 'no hay productos cargados'}
-      return (eval(data));
+      return (data_json);
     } catch (error) {
       return {error : 'no se pudo leer el archivo'};
     }
@@ -20,8 +21,8 @@ export class Productos {
   // Funcion que busca un producto por id
   buscarPorId = async (id) => {
     try {
-      const data = await fs.promises.readFile(`./Entrega08/${this.file_name}`, 'utf-8');
-      const productos = eval(data).filter(producto => producto.id === Number(id));
+      const data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
+      const productos = JSON.parse(data).filter(producto => producto.id === Number(id));
       if(productos.length === 0)
         return {error : 'producto no encontrado'};
       return productos[0];
@@ -30,36 +31,26 @@ export class Productos {
     }
   }
 
-  // Funcion que guarda en el archivo
+  // Funcion que guarda un producto en el archivo
   guardar = async (title, price, thumbnail) => {
     try {
-      const raw_data = await fs.promises.readFile(`./Entrega08/${this.file_name}`, 'utf-8');
-      const data = eval(raw_data);
-      const arr_data = Array.from(data);
+      const raw_data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
+      const data = JSON.parse(raw_data);
       const new_item = {
         title, price, thumbnail, id: data.length + 1
       };
-      arr_data.push(new_item);
-      await fs.promises.writeFile(`./Entrega08/${this.file_name}`, JSON.stringify(arr_data));
+      data.push(new_item);
+      await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify(data));
       return new_item;
     } catch (error) {
-      try {
-        await fs.promises.writeFile(`./Entrega08/${this.file_name}`, JSON.stringify([{
-          title, price, thumbnail, id: 1
-        }]));
-        return { title, price, thumbnail, id: 1 };
-      } catch (writeError) {
-        return { 
-          msg : 'no se pudo escribir el archivo', 
-          error: writeError 
-        };
-      }
+      return { 
+        msg : 'no se pudo guardar el producto', error 
+      };
     }
   }
 
-
   // Funcion que borra el archivo
   borrar = async () => {
-    await fs.promises.unlink(`./Entrega08/${this.file_name}`);
+    await fs.promises.unlink(`./${this.file_name}`);
   }
 }
