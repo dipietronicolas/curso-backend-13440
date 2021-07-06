@@ -1,4 +1,5 @@
 import express from 'express';
+import { router } from './routes/routes.js';
 const app = express();
 
 // Settings
@@ -10,10 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.post('/', (req, res) => {
-  console.log(req.body);
-  res.send('todo bien')
-})
+app.use(router);
 
 app.listen(app.get('PORT'), () => {
   console.log(`Listening on port ${app.get('PORT')}`);
