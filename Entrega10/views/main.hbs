@@ -1,0 +1,32 @@
+<br>
+<div class="list-container col-12 col-xs-10 col-sm-8 col-lg-6">
+  <h2>Product's List</h2>
+
+  {{#if listExists}}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Thumbnail</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#if listExists}}
+      {{#each productos}}
+      <tr>
+        <th class="p-4" scope="row">{{this.id}}</th>
+        <td class="p-4">{{this.title}}</td>
+        <td class="p-4">{{this.price}}</td>
+        <td><img src="{{this.thumbnail}}" class="table-img" alt="img-{{this.id}}" /></td>
+      </tr>
+      {{/each}}
+      {{/if }}
+    </tbody>
+  </table>
+  {{else}}
+  <h2>No hay productos</h2>
+  {{/if}}
+  <a href="/productos/guardar/" class="btn btn-success">Ingresar productos</a>
+</div>
