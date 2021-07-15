@@ -1,0 +1,34 @@
+<div class="list-container col-12 col-xs-10 col-sm-8 col-lg-6">
+  <h2>Product's List</h2>
+
+  <% if (listExists) { %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Thumbnail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% productos.forEach(element=> { %>
+          <tr>
+            <th class="p-4" scope="row"><%= element.id %></th>
+            <td class="p-4"><%= element.title %></td>
+            <td class="p-4"><%= element.price %></td>
+            <td>
+              <img 
+                src="<%= element.thumbnail %>" 
+                class="table-img" 
+                alt="img-<%= element.id %>" />
+            </td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+    <% } else { %>
+      <h2>No hay productos</h2>
+    <% } %>
+    <a href="/productos/guardar/" class="btn btn-success">Ingresar productos</a>
+</div>
