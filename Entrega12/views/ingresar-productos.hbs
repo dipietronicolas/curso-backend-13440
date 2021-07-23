@@ -1,0 +1,47 @@
+<h2>Formulario de ingreso de productos</h2>
+
+<form class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3  d-flex flex-column justify-content-around"
+  action="/api/productos/guardar/" method="POST">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input name="title" type="text" class="form-control" id="title" ria-describedby="emailHelp" required autofocus />
+  </div>
+  <div class="form-group">
+    <label for="price">Price $</label>
+    <input name="price" type="text" class="form-control" id="price" aria-describedby="emailHelp" required />
+  </div>
+  <div class="form-group">
+    <label for="thumbnail">Thumbnail</label>
+    <input name="thumbnail" type="text" class="form-control" id="thumbnail" placeholder="product URL" required />
+  </div>
+  <button type="submit" class="btn btn-primary" onclick="emit()">Confirmar</button>
+  <a href="/productos/vista/" class="btn btn-danger">Volver al listado</a>
+</form>
+{{#if error}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{error}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+
+<table class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3 table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Thumbnail</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each productos}}
+    <tr>
+      <th class="p-4" scope="row">{{this.id}}</th>
+      <td class="p-4">{{this.title}}</td>
+      <td class="p-4">{{this.price}}</td>
+      <td><img src="{{this.thumbnail}}" class="table-img" alt="img-{{this.id}}" /></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
