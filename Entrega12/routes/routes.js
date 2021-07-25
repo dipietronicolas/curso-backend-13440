@@ -5,7 +5,7 @@ const FILE_NAME = "Productos.txt";
 const productos = new Productos(FILE_NAME);
 
 module.exports = (io) => {
-  
+
   // Websockets
   io.on('connection', (socket) => {
 
@@ -17,8 +17,18 @@ module.exports = (io) => {
       const result = await productos.leer();
       io.sockets.emit('Productos', { result });
     });
+
+    socket.on('new product', async ({ title, price, thumbnail }) => {
+      const resultGuardar = await productos.guardar(title, price, thumbnail);
+      if (resultGuardar.error) {
+        socket.emit('save error', { error: resultGuardar.msg })
+      } else {
+        const result = await productos.leer();
+        io.sockets.emit('Productos', { result });
+      }
+    })
   })
-  
+
   // Rutas con interfaz grafica
   router.get('/productos/vista', async (req, res) => {
     const result = await productos.leer();
@@ -47,9 +57,9 @@ module.exports = (io) => {
     const result = await productos.guardar(title, price, thumbnail);
 
     if (result.error) {
-      res.render('./partials/ingresar-productos', { error: result.msg });
+      res.render('ingresar-productos', { error: result.msg });
     } else {
-      res.render('./partials/ingresar-productos', { error: false });
+      res.render('ingresar-productos', { error: false });
     }
   })
 
