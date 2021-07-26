@@ -5,7 +5,7 @@ const form = document.querySelector('#ingresar-form');
 // Manejo del submit del form para que la pagina no recargue
 form.onsubmit = async (e) => {
   e.preventDefault();
-  const response = await fetch('http://localhost:8080/api/productos/guardar/', {
+  await fetch('http://localhost:8080/api/productos/guardar/', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     credentials: 'same-origin', // include, *same-origin, omit
     headers: {
@@ -17,7 +17,6 @@ form.onsubmit = async (e) => {
       thumbnail: e.target.thumbnail.value
     })
   });
-  console.log(response);
 }
 
 // Detecto cuando un nuevo usuario se ha conectado.
