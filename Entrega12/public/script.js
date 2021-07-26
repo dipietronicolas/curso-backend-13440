@@ -31,10 +31,10 @@ const emit = () => {
   socket.emit('get productos');
 }
 
-// recibo los productos
+// recibo todos los productos
 socket.on('Productos', ({ result }) => {
   tableBody.innerHTML = '';
-  for(let i=0; i<result.length; i++){
+  for (let i = 0; i < result.length; i++) {
     tableBody.innerHTML += `
       <tr>
         <th class="p-4" scope="row">${result[i].id}</th>
@@ -44,6 +44,18 @@ socket.on('Productos', ({ result }) => {
       </tr>
     `
   }
+})
+
+// recibo un solo producto
+socket.on('new product', ({ result }) => {
+  tableBody.innerHTML += `
+    <tr>
+      <th class="p-4" scope="row">${result.id}</th>
+      <td class="p-4">${result.title}</td>
+      <td class="p-4">${result.price}</td>
+      <td><img src="${result.thumbnail}" class="table-img" alt="img-${result.id}" /></td>
+    </tr>
+  `
 })
 
 // Si hubo un error al guardar, emito un cartel de error
