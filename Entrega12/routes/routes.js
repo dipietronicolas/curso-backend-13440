@@ -59,6 +59,8 @@ module.exports = (io) => {
     if (result.error) {
       res.render('ingresar-productos', { error: result.msg });
     } else {
+      const products = await productos.leer();
+      io.sockets.emit('Productos', { result: products });
       res.render('ingresar-productos', { error: false });
     }
   })
