@@ -60,7 +60,7 @@ module.exports = (io) => {
       res.render('ingresar-productos', { error: result.msg });
     } else {
       io.sockets.emit('new product', { result });
-      // res.render('ingresar-productos', { error: false });
+      res.status(201).send() // 201 Created, tuvo exito y ha llevado a la creación de un recurso
     }
   })
 
