@@ -1,5 +1,4 @@
 const express = require('express');
-// const router = require('./routes/routes');
 const handlebars = require('express-handlebars');
 const app = express();
 const http = require('http').Server(app)

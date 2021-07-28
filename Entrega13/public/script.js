@@ -15,6 +15,7 @@ chatMessageForm.onsubmit = async (e) => {
   e.target.message.value = '';
 }
 
+// Recibo un mensaje nuevo que fue guardado en el archivo Mensajes.txt
 socket.on('saved message', ({ email, message, time }) => {
   chatDiv.innerHTML += `
     <p>
@@ -31,9 +32,10 @@ socket.on('saved message', ({ email, message, time }) => {
   `
 })
 
-
+// Recibo todos los mensajes cuando se establece la conexion. 
 socket.on('chat messages', results => {
   if (!results.error) {
+    chatDiv.innerHTML = '';
     for (result of results) {
       chatDiv.innerHTML += `
         <p>
@@ -52,7 +54,7 @@ socket.on('chat messages', results => {
   }
 })
 
-// Manejo del submit del form para que la pagina no recargue
+// Manejo del submit del form que ingresa productos para que la pagina no recargue
 addProductForm.onsubmit = async (e) => {
   e.preventDefault();
   await fetch('http://localhost:8080/api/productos/guardar/', {

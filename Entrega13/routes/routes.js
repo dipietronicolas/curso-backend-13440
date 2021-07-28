@@ -27,6 +27,7 @@ module.exports = (io) => {
       io.sockets.emit('saved message', newMessage);
     })
 
+    // Funcion que emite los mensajes guardados al establecer la coneccion
     const emitMessages = async () => {
       const messages = await mensajes.leer();
       io.sockets.emit('chat messages', messages);
