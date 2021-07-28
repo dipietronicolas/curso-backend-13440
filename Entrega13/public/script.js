@@ -30,6 +30,8 @@ socket.on('saved message', ({ email, message, time }) => {
       </span>
     </p>
   `
+  // pongo el scroll del chat siempre abajo
+  chatDiv.scrollTop = chatDiv.scrollHeight;
 })
 
 // Recibo todos los mensajes cuando se establece la conexion. 
@@ -52,6 +54,8 @@ socket.on('chat messages', results => {
       `
     }
   }
+  // pongo el scroll del chat siempre abajo
+  chatDiv.scrollTop = chatDiv.scrollHeight;
 })
 
 // Manejo del submit del form que ingresa productos para que la pagina no recargue
