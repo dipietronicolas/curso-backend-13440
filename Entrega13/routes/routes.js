@@ -34,17 +34,6 @@ module.exports = (io) => {
     }
     emitMessages();
 
-    /*
-    socket.on('new product', async ({ title, price, thumbnail }) => {
-      const resultGuardar = await productos.guardar(title, price, thumbnail);
-      if (resultGuardar.error) {
-        socket.emit('save error', { error: resultGuardar.msg })
-      } else {
-        const result = await productos.leer();
-        io.sockets.emit('Productos', { result });
-      }
-    })
-    */
   })
 
   // Rutas con interfaz grafica
