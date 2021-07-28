@@ -1,0 +1,69 @@
+<h2>Formulario de ingreso de productos</h2>
+
+<form class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3 d-flex flex-column justify-content-around"
+  action="/api/productos/guardar/" method="POST" id="ingresar-form">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input name="title" type="text" class="form-control" id="title" ria-describedby="emailHelp" required autofocus />
+  </div>
+  <div class="form-group">
+    <label for="price">Price $</label>
+    <input name="price" type="text" class="form-control" id="price" aria-describedby="emailHelp" required />
+  </div>
+  <div class="form-group">
+    <label for="thumbnail">Thumbnail</label>
+    <input name="thumbnail" type="text" class="form-control" id="thumbnail" placeholder="product URL" required />
+  </div>
+  <button type="submit" class="btn btn-primary">Confirmar</button>
+  <a href="/productos/vista/" class="btn btn-danger">Volver al listado</a>
+</form>
+{{#if error}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{error}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+<div class="container col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3">
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Thumbnail</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+    </tbody>
+  </table>
+</div>
+
+<!-- Chat message service -->
+<br />
+<div class="container col-12 col-sm-8 col-md-6">
+  <form id="chat-message">
+    <h1 class="display-1 fs-3 mb-5">Message center</h1>
+    <div class="form-floating mb-3">
+      <input 
+        name="email" 
+        type="email" 
+        class="form-control" 
+        id="floatingInputEmail" 
+        placeholder="name@example.com">
+      <label for="floatingInputEmail">Email address</label>
+    </div>
+    <hr />
+    <div class="chat-results"></div>
+    <div class="form-floating mb-3">
+      <input 
+        name="message" 
+        type="text" 
+        class="form-control" 
+        id="floatingInputMessage" 
+        placeholder="Send message">
+      <label for="floatingInputMessage">Send message</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+</div>
