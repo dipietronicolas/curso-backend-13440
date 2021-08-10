@@ -23,11 +23,9 @@ router.post('/agregar', async (req, res) => {
 })
 
 router.put('/actualizar/:id', async (req, res) => {
-  const { title, description, price, stock, thumbnail } = req.body;
-  const { id } = req.params;
-  const result = await productos.modificar(
-    Number(id), title, description, price, stock, thumbnail
-  );
+  const result = await productos.modificar({
+    id: Number(req.params.id), ...req.body
+  });
   res.json(result);
 })
 

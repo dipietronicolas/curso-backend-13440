@@ -1,29 +1,28 @@
 const express = require('express');
 const router = express.Router();
-// const Carrito = require('../Carrito');
+const Carrito = require('../Carrito');
 const CART_FILE_NAME = "Carrito.txt";
-//const carrito = new Carrito(PRODUCTS_FILE_NAME);
+const carrito = new Carrito(CART_FILE_NAME);
 
 // Rutas sin interfaz para postman
 router.get('/listar/:id?', async (req, res) => {
-  /*
   const result = req.params.id
-    ? await productos.buscarPorId(req.params.id)
-    : await productos.leer();
-  */
+    ? await carrito.buscarPorId(req.params.id)
+    : await carrito.leer();
   res.json(result);
 });
 
 router.post('/agregar/:id_producto', async (req, res) => {
   // Enviados por postman, como campos 
   // x-www-form-urlencoded
-  const { title, price, thumbnail } = req.body;
-  // const result = await productos.guardar(title, price, thumbnail);
+  const result = await carrito.guardar({ 
+    id: req.params.id_producto, ...req.body 
+  });
   res.json(result);
 })
 
 router.delete('/borrar/:id', async (req, res) => {
-  // const result = await productos.eliminarProducto(req.params.id);
+  const result = await carrito.eliminarProducto(req.params.id);
   res.json(result);
 })
 

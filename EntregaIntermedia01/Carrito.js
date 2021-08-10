@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { DateTime } = require("luxon");
 
 class Productos {
   constructor(file_name) {
@@ -22,22 +23,27 @@ class Productos {
   buscarPorId = async (id) => {
     try {
       const data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
-      const productos = JSON.parse(data).filter(producto => producto.id === Number(id));
-      if (productos.length === 0)
+      const carrito = JSON.parse(data).filter(producto => producto.id === Number(id));
+      if (carrito.length === 0)
         return { error: 'producto no encontrado' };
-      return productos[0];
+      return carrito[0];
     } catch (error) {
       return { error: 'no se pudo leer el archivo' };
     }
   }
 
   // Funcion que guarda un producto en el archivo
-  guardar = async (title, price, thumbnail) => {
+  guardar = async ({ id, timestamp, title, description, price, stock, thumbnail }) => {
     try {
       const raw_data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
       const data = JSON.parse(raw_data);
       const new_item = {
-        title, price, thumbnail, id: data[data.length - 1].id + 1
+        id: data.length === 0 ? 1 : data[data.length - 1].id + 1, 
+        timestamp: DateTime.now().toFormat("dd/MM/yyyy, tt"),
+        producto: {
+          id, timestamp, title, description, 
+          price, stock, thumbnail
+        }
       };
       data.push(new_item);
       await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify(data));
@@ -82,7 +88,7 @@ class Productos {
       const data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
       const productoEncontrado = JSON.parse(data).filter(producto => producto.id === Number(id));
       if (productoEncontrado.length === 0)
-        return { error: 'producto no encontrado' };
+        return { error: 'producto no encontrado en el carrito' };
 
       const nuevaData = JSON.parse(data).filter(producto => producto.id !== Number(id));
       await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify(nuevaData));

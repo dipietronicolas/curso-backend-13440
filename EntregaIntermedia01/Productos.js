@@ -53,8 +53,9 @@ class Productos {
   }
 
   // Funcion que modifica un producto
-  modificar = async (id, title, description, price, stock, thumbnail) => {
-    // id, title, description, price, stock, thumbnail 
+  modificar = async ({ id, title, description, price, stock, thumbnail }) => {
+    // id enviado por URL params,
+    // title, description, price, stock, thumbnail 
     // enviados por postman, como campos x-www-form-urlencoded
     let foundFlag = false;
     try {
