@@ -1,0 +1,25 @@
+[
+  {
+    "title":"Frasco",
+    "price":500,
+    "thumbnail":"https://cdn3.iconfinder.com/data/icons/spring-2-1/30/Fence-256.png",
+    "id":1
+  },
+  {
+    "title":"perro",
+    "price":"70000",
+    "thumbnail":"https://cdn3.iconfinder.com/data/icons/spring-2-1/30/Sunflower-256.png",
+    "id":2
+  },
+  {
+    "title":"perro pequines",
+    "price":"5000",
+    "thumbnail":"https://cdn3.iconfinder.com/data/icons/spring-2-1/30/Camera-256.png",
+    "id":4
+  },
+  {
+    "title":"Sillon",
+    "price":"55000",
+    "thumbnail":"https://cdn3.iconfinder.com/data/icons/spring-2-1/30/Boot-256.png",
+    "id":5
+  },{"title":"Maletin","price":"2500","thumbnail":"https://cdn1.iconfinder.com/data/icons/business-456/500/business-256.png","id":6}]

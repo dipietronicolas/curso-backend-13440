@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { DateTime } = require("luxon");
 
 class Productos {
   constructor(file_name) {
@@ -32,12 +33,14 @@ class Productos {
   }
 
   // Funcion que guarda un producto en el archivo
-  guardar = async (title, price, thumbnail) => {
+  guardar = async (title, description, price, stock, thumbnail) => {
     try {
       const raw_data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
       const data = JSON.parse(raw_data);
       const new_item = {
-        title, price, thumbnail, id: data[data.length - 1].id + 1
+        id: data.length === 0 ? 1 : data[data.length - 1].id + 1, 
+        timestamp: DateTime.now().toFormat("dd/MM/yyyy, tt"),
+        title, description, price, stock, thumbnail
       };
       data.push(new_item);
       await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify(data));
@@ -50,8 +53,9 @@ class Productos {
   }
 
   // Funcion que modifica un producto
-  modificar = async (id, title, price, thumbnail) => {
-    // id, title, price enviados por postman, como campos x-www-form-urlencoded
+  modificar = async (id, title, description, price, stock, thumbnail) => {
+    // id, title, description, price, stock, thumbnail 
+    // enviados por postman, como campos x-www-form-urlencoded
     let foundFlag = false;
     try {
       let items = await this.leer();
@@ -61,7 +65,9 @@ class Productos {
       for (let i = 0; i < items.length; i++) {
         if (items[i].id === id) {
           items[i].title = title;
+          items[i].description = description;
           items[i].price = price;
+          items[i].stock = stock;
           items[i].thumbnail = thumbnail;
           foundFlag = true;
         }
@@ -70,7 +76,7 @@ class Productos {
         return { error: "producto no encontrado" }
 
       await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify(items));
-      return { id, title, price, thumbnail };
+      return { id, title, description, price, stock, thumbnail };
     } catch (error) {
       return { error: "no se pudo modificar el item" }
     }

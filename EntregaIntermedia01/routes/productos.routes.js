@@ -15,15 +15,19 @@ router.get('/listar/:id?', async (req, res) => {
 router.post('/agregar', async (req, res) => {
   // Enviados por postman, como campos 
   // x-www-form-urlencoded
-  const { title, price, thumbnail } = req.body;
-  const result = await productos.guardar(title, price, thumbnail);
+  const { title, description, price, stock, thumbnail } = req.body;
+  const result = await productos.guardar(
+    title, description, price, stock, thumbnail
+  );
   res.json(result);
 })
 
 router.put('/actualizar/:id', async (req, res) => {
-  const { title, price, thumbnail } = req.body;
+  const { title, description, price, stock, thumbnail } = req.body;
   const { id } = req.params;
-  const result = await productos.modificar(Number(id), title, price, thumbnail);
+  const result = await productos.modificar(
+    Number(id), title, description, price, stock, thumbnail
+  );
   res.json(result);
 })
 
