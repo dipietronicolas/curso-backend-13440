@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Productos = require('../Productos');
+const Productos = require('../services/Productos');
 const PRODUCTS_FILE_NAME = "Productos.txt";
 const productos = new Productos(PRODUCTS_FILE_NAME);
 

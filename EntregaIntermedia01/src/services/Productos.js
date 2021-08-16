@@ -9,7 +9,7 @@ class Productos {
   // Funcion que lee el archivo
   leer = async () => {
     try {
-      const data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
+      const data = await fs.promises.readFile(`../../db/${this.file_name}`, 'utf-8');
       const data_json = JSON.parse(data);
       if (data_json.length === 0)
         return { error: 'no hay productos cargados' }
@@ -22,7 +22,7 @@ class Productos {
   // Funcion que busca un producto por id
   buscarPorId = async (id) => {
     try {
-      const data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
+      const data = await fs.promises.readFile(`../../db/${this.file_name}`, 'utf-8');
       const productos = JSON.parse(data).filter(producto => producto.id === Number(id));
       if (productos.length === 0)
         return { error: 'producto no encontrado' };
@@ -35,7 +35,7 @@ class Productos {
   // Funcion que guarda un producto en el archivo
   guardar = async (title, description, price, stock, thumbnail) => {
     try {
-      const raw_data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
+      const raw_data = await fs.promises.readFile(`../../db/${this.file_name}`, 'utf-8');
       const data = JSON.parse(raw_data);
       const new_item = {
         id: data.length === 0 ? 1 : data[data.length - 1].id + 1, 
@@ -43,7 +43,7 @@ class Productos {
         title, description, price, stock, thumbnail
       };
       data.push(new_item);
-      await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify(data));
+      await fs.promises.writeFile(`../../db/${this.file_name}`, JSON.stringify(data));
       return new_item;
     } catch (error) {
       return {
@@ -76,7 +76,7 @@ class Productos {
       if (!foundFlag)
         return { error: "producto no encontrado" }
 
-      await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify(items));
+      await fs.promises.writeFile(`../../db/${this.file_name}`, JSON.stringify(items));
       return { id, title, description, price, stock, thumbnail };
     } catch (error) {
       return { error: "no se pudo modificar el item" }
@@ -86,13 +86,13 @@ class Productos {
   // Funcion que elimina un producto
   eliminarProducto = async (id) => {
     try {
-      const data = await fs.promises.readFile(`./${this.file_name}`, 'utf-8');
+      const data = await fs.promises.readFile(`../../db/${this.file_name}`, 'utf-8');
       const productoEncontrado = JSON.parse(data).filter(producto => producto.id === Number(id));
       if (productoEncontrado.length === 0)
         return { error: 'producto no encontrado' };
 
       const nuevaData = JSON.parse(data).filter(producto => producto.id !== Number(id));
-      await fs.promises.writeFile(`./${this.file_name}`, JSON.stringify(nuevaData));
+      await fs.promises.writeFile(`../../db/${this.file_name}`, JSON.stringify(nuevaData));
       return productoEncontrado;
     } catch (error) {
       return { error: 'no se pudo leer el archivo' };
@@ -101,7 +101,7 @@ class Productos {
 
   // Funcion que borra el archivo
   borrar = async () => {
-    await fs.promises.unlink(`./${this.file_name}`);
+    await fs.promises.unlink(`../../db/${this.file_name}`);
   }
 }
 

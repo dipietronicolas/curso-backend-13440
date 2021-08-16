@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Carrito = require('../Carrito');
+const Carrito = require('../services/Carrito');
 const CART_FILE_NAME = "Carrito.txt";
 const carrito = new Carrito(CART_FILE_NAME);
 
