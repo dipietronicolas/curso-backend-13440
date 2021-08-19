@@ -23,7 +23,7 @@ app.set("view engine", "hbs");
 app.set("views", "./src/views");
 
 // Middlewares
-app.use(express.static('./src/public'));
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

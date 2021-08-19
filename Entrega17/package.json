@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/server.js",
-    "ServerES6toJS5": "node_modules/.bin/babel ./server.es6.js -o ./server.js",
-    "ServerTStoJS5": "node_modules/.bin/tsc ./server.ts"
+    "ServerES6toJS5": "node_modules/.bin/babel ./src/server.es6.js -o ./src/server.js",
+    "ServerTStoJS5": "node_modules/.bin/tsc ./src/server.ts"
   },
   "author": "Nicolas Di Pietro Paolo",
   "license": "ISC",
