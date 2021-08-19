@@ -1,38 +1,29 @@
-const fs = require('fs');
-const { DateTime } = require("luxon");
+const MensajesDAO = require('../models/dao/MensajesDAO');
+const mensajesDao = new MensajesDAO();
 
 class Mensajes {
   constructor(file_name) {
     this.file_name = file_name;
   }
+
   // Funcion que lee el archivo
   leer = async () => {
     try {
-      const data = await fs.promises.readFile(`../models/db/${this.file_name}`, 'utf-8');
-      const data_json = JSON.parse(data);
-      if (data_json.length === 0)
+      const mensajes = await mensajesDao.getMessages();
+      if (mensajes.length === 0)
         return { error: 'no hay mensajes previos' }
-      return (data_json);
+      return (mensajes);
     } catch (error) {
-      return { error: 'no se pudo leer el archivo' };
+      return { error: 'no se pudo leer la base de datos' };
     }
   }
 
   // Funcion que guarda un producto en el archivo
   guardar = async (email, message) => {
     try {
-      const raw_data = await fs.promises.readFile(`../models/db/${this.file_name}`, 'utf-8');
-      let data = [];
-      if(raw_data){
-        data = JSON.parse(raw_data);
-      } 
-      const new_message = {
-        email, message,
-        time: DateTime.now().toFormat("dd/MM/yyyy, tt")
-      };
-      data.push(new_message);
-      await fs.promises.writeFile(`../models/db/${this.file_name}`, JSON.stringify(data));
-      return new_message;
+      return mensajesDao.postMessage({
+        email, message
+      });
     } catch (error) {
       return {
         msg: 'no se pudo guardar el mensaje', error

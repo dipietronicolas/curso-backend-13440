@@ -16,14 +16,14 @@ chatMessageForm.onsubmit = async (e) => {
 }
 
 // Recibo un mensaje nuevo que fue guardado en el archivo Mensajes.txt
-socket.on('saved message', ({ email, message, time }) => {
+socket.on('saved message', ({ email, message, created_at }) => {
   chatDiv.innerHTML += `
     <p>
       <span class="text-primary fw-bold">
         ${email}
       </span> 
       [<span class="text-danger">
-        ${time}
+        ${JSON.stringify(created_at).slice(0,20).replace('T', ' - ')}
       </span>]: 
       <span class="text-success">
         ${message}
@@ -45,7 +45,7 @@ socket.on('chat messages', results => {
             ${result.email}
           </span> 
           [<span class="text-danger">
-            ${result.time}
+            ${JSON.stringify(result.created_at).slice(0,20).replace('T', ' - ')}
           </span>]: 
           <span class="text-success">
             ${result.message}
