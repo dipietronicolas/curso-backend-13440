@@ -1,0 +1,8 @@
+para crear migrations directory:
+npx knex migrate:make init --migrations-directory src/models/db/migrations
+
+Crear la tabla student
+npx knex migrate:latest --knexfile src/models/db/knexfile.js
+
+Borrar la tabla student
+npx knex migrate:down --knexfile src/models/db/knexfile.js
