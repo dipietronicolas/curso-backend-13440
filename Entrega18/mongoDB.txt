@@ -1,0 +1,20 @@
+1. CREAR BASE
+
+use prueba
+
+2 y 3. CREAR COLLECTION E INSERTAR CAMPOS
+
+db.items.insert({nombre: 'Fideos', categoria: 'Harina', stock: 20})
+db.items.insert({nombre: 'Leche', categoria: 'Lacteos', stock: 30})
+db.items.insert({nombre: 'Crema', categoria: 'Lacteos', stock: 15})
+
+4. LISTAR LOS ITEMS AGREGADOS
+
+db.items.find().pretty()
+
+5. MOSTRAR BASES DE DATOS, Y COLLECTIONS Y DOCUMENTOS DE 'prueba'
+
+show databases
+use items
+show collections
+db.items.find().pretty()
