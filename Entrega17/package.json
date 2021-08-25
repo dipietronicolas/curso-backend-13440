@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon ./src/server.js",
     "ServerES6toJS5": "node_modules/.bin/babel ./src/server.es6.js -o ./src/server.js",
-    "ServerTStoJS5": "node_modules/.bin/tsc ./src/server.ts"
+    "ServerTStoJS5": "node_modules/.bin/tsc ./src/server.ts",
+    "upMigrations": "knex migrate:latest --cwd='./src/models/db'",
+    "rollbackMigrations": "knex migrate:rollback --cwd='./src/models/db'"
   },
   "author": "Nicolas Di Pietro Paolo",
   "license": "ISC",
