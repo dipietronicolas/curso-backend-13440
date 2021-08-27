@@ -1,0 +1,175 @@
+CREO LA BASE
+-----------------------------
+use ecommerce
+
+INSERTO 10 PRODUCTOS
+-----------------------------
+db.productos.insert([
+  { 
+    "title": "Mesa", 
+    "description": "Mesa de living",
+    "price": 5000,
+    "thumbnail": "picture.com",
+  },
+  { 
+    "title": "Mesa ratona", 
+    "description": "Mesa ratona para cafe",
+    "price": 4500,
+    "thumbnail": "picture.com",
+  },
+  { 
+    "title": "Auto de juguete", 
+    "description": "Para que les niñes jueguen",
+    "price": 450,
+    "thumbnail": "picture.com",
+  },
+  { 
+    "title": "Lapicera azul", 
+    "description": "Lapicera vhic color azul",
+    "price": 550,
+    "thumbnail": "picture.com",
+  },
+  { 
+    "title": "Lacepicera negra", 
+    "description": "Lapicera tinta negra",
+    "price": 1250,
+    "thumbnail": "picture.com",
+  },
+  { 
+    "title": "Queso de cabra", 
+    "description": "queso queso queso de cabra",
+    "price": 1460,
+    "thumbnail": "picture.com",
+  },
+  { 
+    "title": "Jamon iberico x100g", 
+    "description": "Jamon crudo de excelente calidad",
+    "price": 1800,
+    "thumbnail": "picture.com",
+  },
+  { 
+    "title": "Billetera", 
+    "description": "Billetera de cuero sintetico",
+    "price": 2450,
+    "thumbnail": "picture.com",
+  },
+  { 
+    "title": "Encendedor zippo", 
+    "description": "Excelente calidad de encendedor",
+    "price": 3500,
+    "thumbnail": "picture.com",
+  },
+  { 
+    "title": "Ukelele", 
+    "description": "Gran instrumento para iniciarse en la musica",
+    "price": 4100,
+    "thumbnail": "picture.com",
+  }
+])
+
+INSERTO 10 MENSAJES
+Nota: Vi que se puede agregar con las claves entre comillas 
+y sin comillas y que en la colection no hay diferencia
+-----------------------------
+db.mensajes.insert([
+  {
+    email: "asd@asd.com",
+    message: "Hola, que tal?"
+  },
+  {
+    email: "fgh@fgh.com",
+    message: "Todo bien, vos?"
+  },
+  {
+    email: "asd@asd.com",
+    message: "Bien bien, laburando"
+  },
+  {
+    email: "fgh@fgh.com",
+    message: "Mal ahi che"
+  },
+  {
+    email: "asd@asd.com",
+    message: "Tampoco mal, al menos tengo laburo, vos que haces?"
+  },
+  {
+    email: "fgh@fgh.com",
+    message: "Juego mucho a la play, a veces salgo a comprar"
+  },
+  {
+    email: "asd@asd.com",
+    message: "Pero no laburas? "
+  },
+  {
+    email: "fgh@fgh.com",
+    message: "Y no, mi papa tiene un monton de plata asi que vivo de el"
+  },
+  {
+    email: "asd@asd.com",
+    message: "ahh bueno, asi la vida te va a pasar por encima a vos"
+  },
+  {
+    email: "fgh@fgh.com",
+    message: "Si, pero al menos no laburo"
+  },
+])
+
+LISTAR TODOS LOS DOCUMENTOS DE CADA COLLECTION
+-----------------------------
+db.productos.find().pretty()
+db.mensajes.find().pretty()
+
+MOSTRAR LA CANTIDAD DE DOCUMENTOS ALMACENADOS EN CADA UNA DE ELLAS
+-----------------------------
+db.productos.count() // buscar la diferencia entre estas dos
+db.productos.estimatedDocumentCount()
+db.mensajes.count()
+
+REALIZAR UN CRUD SOBRE LA COLLECTION
+-----------------------------
+a) 
+db.productos.insert(
+  { 
+    "title": "Jean de hombre", 
+    "description": "jean azul talle 40",
+    "price": 3240,
+    "thumbnail": "picture.com",
+  }
+)
+b) // $lt: lower than, $lte: lower or equal than
+ i) db.productos.find({ price : {$lt: 1000 }}, {title: 1})
+ ii) db.productos.find({ $and: [{price: {$gte: 1000 }},{price: {$lte: 3000 }} ]}, {title: 1})
+ iii) db.productos.find({ price : {$gt: 3000 }}, {title: 1})
+ iv) db.productos.find({}, {title: 1}).sort({ price: 1 }).skip(2).limit(1)
+c)
+db.productos.update({}, { $set: { stock: 100}}, false, true)
+// upsert: false - crea un nuevo documento si ninguno cumple el criterio de busqueda
+// multi: true - altera todos los documentos que matcheen con el criterio de busqueda. 
+	si está en false, altera solo uno.
+d) 
+db.productos.update({ price : {$gt: 4000 }}, { $set: { stock: 0}}, false, true)
+e)
+db.productos.deleteMany({ price: { $lt: 1000 }})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
